@@ -1,4 +1,5 @@
 from Course import Course
+from Graph import Graph
 
 ask1 = 'y'
 List = []
@@ -35,7 +36,7 @@ for a in List:
                     a.pre_req.append(c)
 
 
-Matrix = [[]]
+Matrix = []
 
 for i in range(0, len(List)):
     Matrix.append([])
@@ -60,6 +61,8 @@ for a in range(0, len(List)):
     for b in range(0, len(List)):
         print (str(Matrix[a][b]) + "\t"),
     print "\n"
-        
+
+graph = Graph(List, Matrix)
+graph.sort()
 
         
