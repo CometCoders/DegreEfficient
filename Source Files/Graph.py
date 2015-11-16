@@ -2,40 +2,53 @@
 
 from Course import Course
 
-import numpy
-
 class Graph:
     """The class that implements the degree's DAG."""
-    def __init__(self):
-        self.List = []                             # List of courses.
-        self.mHPS = 18                             # Max credit hours per semester.
-        self.matrix                                # The adjacency matrix (Will be a numpy matrix).
+    def __init__(self, List, matrix):
+        self.List = List                            # List of courses.
+        self.mHPS = 18                              # Max credit hours per semester.
+        self.matrix = matrix                        # The adjacency matrix.
+        self.ListBySem = []                         # List of courses, grouped by semester.
+
     def sort(self):
-        minInDegree = 100                          # No courses have 100s of prereqs. 
-        for course in self.List:
-            curInDegree = 0                        # The in-degree of the course we're looking at.
-            for j in range(0, len(self.List)):
-                curInDegree += self.matrix[course.id][j]
-            if (curInDegree < minInDegree):
-                minInDegree = curInDegree
-        assert minInDegree == 0, "Invalid plan!"  # This graph is not a DAG if this assertion fails.
-        canTake = []                               # The list of courses one can take this semester.
-        for course in self.List:
-            curInDegree = 0
-            for j in range(0, len(self.List)):
-                curInDegree += self.matrix[course.id][j]
-            if (curInDegree == minInDegree):
-                canTake.append(course)             # If the course has minInDegree, then add it to the list.
-        for course in canTake:                    # Calculate the out-degree for every course.
-            curOutDegree = 0
-            for i in range(0, len(canTake)):
-                curOutDegree += self.matrix[i][course.id]
-            course.outDegree = curOutDegree        
-        canTake.sort(key = lambda course: -course.outDegree)  # Sort the list of available courses by outDegree (descending order).
-        # NOTE: THIS METHOD IS INCOMPLETE AS OF YET.
-        
-                
-                    
-                
+        """Produces a list of courses to take, grouped by semester."""
+        # Only barebones topological sort for now. No support for max hours.
+        firstZero = False                           # We want to run at least once after the matrix has all zeros.
+        while (not self.done() or not firstZero):
+            if (self.done() and not firstZero):
+                firstZero = True
+            canTake = []
+            for i in range(0, len(self.matrix)):
+                if (self.List[i].beenTaken()):
+                    continue
+                print self.List[i].get_name(), ' can be taken - ', 
+                canTakeThis = True
+                for j in range(0, len(self.matrix)):
+                    if (self.matrix[i][j] != 0):
+                        canTakeThis = False
+                        break
+                print(canTakeThis), 
+                x = int(raw_input("Press 1 to continue: "))
+                if (canTakeThis):
+                    self.List[i].take()             
+                    canTake.append(self.List[i])
+            for j in range(0, len(canTake)):
+                for i in range (0, len(self.matrix)):
+                    self.matrix[i][canTake[j].get_Id()] = 0
+            self.ListBySem.append(canTake)
+        for i in range(0, len(self.ListBySem)):
+            for j in range(0, len(self.ListBySem[j])):
+                print(self.ListBySem[i][j].get_name())
+
+    def done(self):
+        """Checks to see if we're done adding courses to ListBySem or not."""
+        print(self.matrix)
+        print(len(self.matrix))
+        for i in range(0, len(self.matrix)):
+            for j in range(0, len(self.matrix)):
+                if (self.matrix[i][j] != 0):
+                    return False
+        return True
+                        
         
         
