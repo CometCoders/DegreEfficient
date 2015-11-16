@@ -17,14 +17,20 @@ class Course(object):
         self.credit = c
 
     def get_name(self):
-        return(self.name)
+        return self.name
 
     def get_credit(self):
-        return(self.credit)
+        return self.credit
 
     def add_Id(self, n):
         self.Id = n
 
     def get_Id(self):
         return(self.Id)
+
+    def take(self):
+        self.taken = True
+
+    def beenTaken(self):
+        return self.taken
     
