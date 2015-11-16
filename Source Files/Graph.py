@@ -18,7 +18,7 @@ class Graph:
             if (self.done() and not firstZero):             # Saw all zeros for the first time.
                 firstZero = True                            # So the next time won't be the first time anymore.
             canTake = []                                    # The list of courses we can take in a given semester. 
-             for i in range(0, len(self.matrix)):           # Iterate through all courses to see which ones can be taken.
+            for i in range(0, len(self.matrix)):            # Iterate through all courses to see which ones can be taken.
                 if (self.List[i].beenTaken()):              # If course i has been taken ...
                     continue                                # ... then look at the next one.
                 print self.List[i].get_name(), ' can be taken - ',  # For debugging.
@@ -37,8 +37,9 @@ class Graph:
                     self.matrix[i][canTake[j].get_Id()] = 0 # ... and remove it as a prereq for each one. 
             self.ListBySem.append(canTake)                  # Add this semester's courses to the bigger list. 
         for i in range(0, len(self.ListBySem)):             # For 
-            for j in range(0, len(self.ListBySem[j])):      # Debugging
-                print(self.ListBySem[i][j].get_name())      # (---)
+            for j in range(0, len(self.ListBySem[i])):      # Debugging
+                print(self.ListBySem[i][j].get_name()),     # (---)
+            print("")
 
     def done(self):
         """Checks to see if we're done adding courses to ListBySem or not. Returns True if the matrix has all 0s."""
