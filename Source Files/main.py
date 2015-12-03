@@ -3,9 +3,9 @@ from Graph import Graph
 
 ask1 = 'y'
 List = []
-i = 0
 
-while ask1=='y':
+
+"""while ask1=='y':
     name = raw_input("Enter the course name: ")
     credit = int(raw_input("Enter the credit hours: "))
     c = Course()
@@ -33,9 +33,49 @@ for a in List:
         for prereq in prereqs.split(" "):
             for c in List:
                 if (c.name == prereq):
+                    a.pre_req.append(c)"""
+
+f = open("Sample.txt", 'r')
+
+i = 0
+lines = []
+for line in f:
+    lines.append(line)
+    i = i + 1
+
+for j in range(0, len(lines)):
+    l = lines[j]
+    parts = []
+    pres = []
+    parts = l.split(", ")
+    if(len(parts) > 2):
+        pres = parts[2].split(": ")
+        t = len(pres)-1
+        pres[t] = pres[t].rstrip()
+    else:
+        pres = []
+    c = Course()
+    c.name = parts[0]
+    c.credit = int(parts[1])
+    c.Id = j
+    for p in pres:
+        c.pre_req_name.append(p)
+    List.append(c)
+
+for a in List:
+    if(len(a.pre_req_name) > 0):
+        for name in a.pre_req_name:
+            for c in List:
+                if(c.name == name):
                     a.pre_req.append(c)
 
+for a in List:
+    print a.name, a.credit,
+    for n in a.pre_req_name:
+        print n,
+    print "\n"
 
+    
 Matrix = []
 
 for i in range(0, len(List)):

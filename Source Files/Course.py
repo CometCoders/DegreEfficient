@@ -9,6 +9,7 @@ class Course(object):
         self.outDegree = 0       # The number of courses for which this is a pre-req.
         self.taken = False       # Has the course been taken or not.
         self.pre_req = []
+        self.pre_req_name = []
     
     def add_name(self, n):
         self.name = n
