@@ -34,4 +34,12 @@ class Course(object):
 
     def beenTaken(self):
         return self.taken
+
+    def toString(self):
+        if (len(self.name) == 2): 
+            return "[ " + self.name + " ]"
+        elif (len(self.name) == 3):
+            return "[" + self.name  + " ]"
+        else:
+            return "[" +  self.name  + "]"
     
