@@ -1,6 +1,7 @@
 """The file to make and display the degree plan."""
 
 from Course import Course
+import sys
 
 class Graph:
     """The class that implements the degree's DAG."""
@@ -21,14 +22,14 @@ class Graph:
             for i in range(0, len(self.matrix)):            # Iterate through all courses to see which ones can be taken.
                 if (self.List[i].beenTaken()):              # If course i has been taken ...
                     continue                                # ... then look at the next one.
-                print self.List[i].get_name(), ' can be taken - ',  # For debugging.
+                #print self.List[i].get_name(), ' can be taken - ',  # For debugging.
                 canTakeThis = True                          # Assume that course i can be taken.
                 for j in range(0, len(self.matrix)):        # Look at all the courses to see which ones are a prereq of i.
                     if (self.matrix[i][j] != 0):            # If any of the prereqs has not been taken already ...
                         canTakeThis = False                 # ... then this one cannot be taken.
                         break                               # No need to look at any other prereqs. 
-                print(canTakeThis),                                 # For debugging.
-                x = int(raw_input("Press 1 to continue: "))         # For debugging.
+                #print(canTakeThis),                                 # For debugging.
+                #x = int(raw_input("Press 1 to continue: "))         # For debugging.
                 if (canTakeThis):                           # If course i can be taken ...
                     self.List[i].take()                     # ... then take it ...
                     canTake.append(self.List[i])            # ... and add it to the list of courses to take in this semester.
@@ -36,20 +37,42 @@ class Graph:
                 for i in range (0, len(self.matrix)):       # ... iterate through the list of courses, ...
                     self.matrix[i][canTake[j].get_Id()] = 0 # ... and remove it as a prereq for each one. 
             self.ListBySem.append(canTake)                  # Add this semester's courses to the bigger list. 
-        for i in range(0, len(self.ListBySem)):             # For 
-            for j in range(0, len(self.ListBySem[i])):      # Debugging
-                print(self.ListBySem[i][j].get_name()),     # (---)
+        #for i in range(0, len(self.ListBySem)):             # For 
+            #for j in range(0, len(self.ListBySem[i])):      # Debugging
+                #print(self.ListBySem[i][j].get_name()),     # (---)
             print("")
 
     def done(self):
         """Checks to see if we're done adding courses to ListBySem or not. Returns True if the matrix has all 0s."""
-        print(self.matrix)
-        print(len(self.matrix))
+        #print(self.matrix)                                  # For
+        #print(len(self.matrix))                             # Debugging (---)      
         for i in range(0, len(self.matrix)):
             for j in range(0, len(self.matrix)):
                 if (self.matrix[i][j] != 0):
                     return False
         return True
-                        
-        
-        
+
+    def display(self):
+        """Displays ListBySem on the console. Primitive graphics output."""
+        maxCIAS = 0                                         # The [max]imum number of Courses In Any Semester.
+        for List in self.ListBySem:                         # Check ever semester's List in ListBySem ...
+            if (len(List) > maxCIAS):                       # ... and update the maxCIAS value.
+                maxCIAS = len(List)
+        graphWidth = maxCIAS * 12                           # _[____ ____]
+        semester = 1
+        for List in self.ListBySem:                         # For every semester's course list.
+            print("\t   |")                                 # Blank preceding line.
+            print("Semester " + str(semester) + " |"),
+            blanksBWCourses = graphWidth - len(List) * 12
+            blanksBWCourses /= (len(List) + 1)              # Blanks between each course.
+            for course in List:
+                for i in range(0, blanksBWCourses):
+                    print(""),
+                print(course.toString()),
+            print("\n\t   |")                               # Blank succeeding line.
+            semester += 1
+        sys.stdout.write("\t   |"),
+        endline = ""
+        for i in range(0, graphWidth):
+            endline += "_"
+        print(endline)
