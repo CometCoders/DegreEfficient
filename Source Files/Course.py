@@ -10,7 +10,8 @@ class Course(object):
         self.taken = False       # Has the course been taken or not.
         self.pre_req = []
         self.pre_req_name = []
-    
+        self.notBefore = 1       # We can take this course 'not before' <semester number>. 
+        
     def add_name(self, n):
         self.name = n
         
@@ -37,9 +38,18 @@ class Course(object):
 
     def toString(self):
         if (len(self.name) == 2): 
-            return "[ " + self.name + " ]"
+            return "[ " + self.name + " ] " + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
         elif (len(self.name) == 3):
-            return "[" + self.name  + " ]"
+            return "[" + self.name  + " ]" + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
         else:
-            return "[" +  self.name  + "]"
+            return "[" +  self.name + "]" + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
+
+    @staticmethod
+    def cmpByOutDegree(a, b):
+        if (a.outDegree < b.outDegree):
+            return -1
+        elif (a.outDegree > b.outDegree):
+            return 1
+        else:
+            return 0
     

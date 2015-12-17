@@ -37,6 +37,8 @@ for a in List:
             for c in List:
                 if(c.name == name):
                     a.pre_req.append(c)
+                    c.outDegree += 1
+    a.inDegree = len(a.pre_req_name)
 
 """
 STUFF FOR DEBUGGING.
@@ -81,4 +83,4 @@ graph = Graph(List, Matrix)
 graph.sort()
 graph.display()
 
-        
+print("Ended")      
