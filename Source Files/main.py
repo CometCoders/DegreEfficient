@@ -39,7 +39,7 @@ for a in List:
                     a.pre_req.append(c)
                     c.outDegree += 1
     a.inDegree = len(a.pre_req_name)
-
+    
 """
 STUFF FOR DEBUGGING.
 for a in List:
