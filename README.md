@@ -7,15 +7,15 @@ DegreEfficient will help you graduate as early as possible, keeping these prefer
 
 ## Usage
 
-&nbsp; `python main.py filepath maxHrsPerSem`
+`python main.py filepath maxHrsPerSem`
 
-&nbsp; `filepath` is the path to the (properly formatted) course list. `maxHrsPerSem` is the maximum number of credit hours per semester. 
+`filepath` is the path to the (properly formatted) course list. `maxHrsPerSem` is the maximum number of credit hours per semester. 
 
 ## Format of Course List
 
 A text file containing data in this format:
 
-&nbsp; `CourseName: #CreditHours: PrereqName1, PrereqName2, ...`
+`CourseName: #CreditHours: PrereqName1, PrereqName2, ...`
 
 ## To do
 
