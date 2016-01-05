@@ -4,7 +4,7 @@ from Graph import Graph
 ask1 = 'y'
 List = []
 
-f = open("Sample.txt", 'r')
+f = open("Sample.cfg", 'r')
 
 i = 0
 lines = []
@@ -16,9 +16,9 @@ for j in range(0, len(lines)):
     l = lines[j]
     parts = []
     pres = []
-    parts = l.split(", ")
+    parts = l.split(": ")
     if(len(parts) > 2):
-        pres = parts[2].split(": ")
+        pres = parts[2].split(", ")
         t = len(pres)-1
         pres[t] = pres[t].rstrip()
     else:
