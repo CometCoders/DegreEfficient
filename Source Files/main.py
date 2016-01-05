@@ -6,9 +6,9 @@ import sys
 ask1 = 'y'
 List = []
 
-file = "Sample.cfg" if len(sys.argv) == 1 else sys.argv[1]
+filename = "Sample.cfg" if len(sys.argv) == 1 else sys.argv[1]
 
-f = open(file, 'r')
+f = open(filename, 'r')
 
 i = 0
 lines = []
@@ -84,6 +84,8 @@ for a in range(0, len(List)):
 """
 
 graph = Graph(List, Matrix)
+if (len(sys.argv) == 3):
+    graph.mHPS = int(sys.argv[2])
 graph.sort()
 graph.display()
 
