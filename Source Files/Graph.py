@@ -64,12 +64,12 @@ class Graph:
         for List in self.ListBySem:                                     # Check ever semester's List in ListBySem ...
             if (len(List) > maxCIAS):                                   # ... and update the maxCIAS value.
                 maxCIAS = len(List)
-        graphWidth = maxCIAS * 18                                       # _[____ ____](_,_)
+        graphWidth = maxCIAS * 12                                       # _[____ ____]
         semester = 1
         for List in self.ListBySem:                                     # For every semester's course list.
             print("\t   |")                                             # Blank preceding line.
             print("Semester " + str(semester) + " |"),
-            blanksBWCourses = graphWidth - len(List) * 18
+            blanksBWCourses = graphWidth - len(List) * 12
             blanksBWCourses /= (len(List) + 1)                          # Blanks between each course.
             for course in List:
                 for i in range(0, blanksBWCourses):
