@@ -1,10 +1,14 @@
 from Course import Course
 from Graph import Graph
 
+import sys
+
 ask1 = 'y'
 List = []
 
-f = open("Sample.cfg", 'r')
+file = "Sample.cfg" if len(sys.argv) == 1 else sys.argv[1]
+
+f = open(file, 'r')
 
 i = 0
 lines = []
