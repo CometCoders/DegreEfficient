@@ -1,6 +1,7 @@
-"""The class wrapping a course."""
+"""The file containing the Course class"""
 
 class Course(object):
+    """Blueprint for each course."""
     def __init__(self):
         self.name = ''           # The course name.
         self.credit = 0          # The number of credit hours. 
