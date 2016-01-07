@@ -19,8 +19,8 @@ A text file containing data in this format:
 
 ## To do
 
- * Support for co-requisites (both weak and strict).
- * Support for courses that can't be taken before a given semester. 
+ - [ ] Support for co-requisites (both weak and strict).
+ - [ ] Support for courses that can't be taken before a given semester. 
 
 ## License
 
