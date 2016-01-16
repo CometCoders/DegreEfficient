@@ -30,7 +30,9 @@ class Graph:
                         break                                           # No need to look at any other prereqs. 
                 if (canTakeThis):                                       # If course i can be taken ...
                     canTake.append(self.List[i])                        # ... add it to the list of courses to take in this semester.
-            canTake.sort(Course.cmpByOutDegree, None, False)            # Sort the list by outDegree. Take the highest ones first.
+            canTake.sort(Course.cmpByOutDegree, None, False)            # Sort the list by outDegree. Take the ones with greater outDegree first.
+            canTake.sort(Course.cmpByCredit, None, False)               # Now (stable) sort the list by credits. Take the ones with more credits first.
+                                                                        # This is done since we have more room to adjust bigger courses earlier.
             creditHours = 0                                             # The number of credit hours to be taken in this semester.
             toBeTaken = []                                              # The list of courses to actually be taken in this semester.
             while (creditHours <= self.mHPS):                           # While we haven't exceeded the max # of credit hours we can take ...
