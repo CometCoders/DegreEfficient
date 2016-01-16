@@ -53,4 +53,13 @@ class Course(object):
             return 1
         else:
             return 0
+
+    @staticmethod
+    def cmpByCredit(a, b):
+        if (a.credit < b.credit):
+            return -1
+        elif (a.credit > b.credit):
+            return 1
+        else:
+            return 0
     
