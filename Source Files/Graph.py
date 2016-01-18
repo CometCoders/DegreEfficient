@@ -43,9 +43,9 @@ class Graph:
                 creditHours += course.credit                            # Update the number of hours.
                 if (creditHours > self.mHPS):                           # If we went over ...
                     creditHours -= course.credit                        # ... take the update back ...
-                    break                                               # ... and break.
+                    continue                                            # ... and look for some other course to add (one with less credit hours).
                 toBeTaken.append(course)                                # Else add it to the list of courses to be taken this semester.
-                course.take()                               
+                course.take()                                           # Take this course.
             for j in range(0, len(toBeTaken)):                          # Now, for every course we can take in this semester ...
                 for i in range (0, len(self.matrix)):                   # ... iterate through the list of courses, ...
                     self.matrix[i][toBeTaken[j].get_Id()] = 0           # ... and remove it as a prereq for each one. 
@@ -54,10 +54,9 @@ class Graph:
 
     def done(self):
         """Checks to see if we're done adding courses to ListBySem or not. Returns True if the matrix has all 0s."""
-        for i in range(0, len(self.matrix)):
-            for j in range(0, len(self.matrix)):
-                if (self.matrix[i][j] != 0):
-                    return False
+        for course in self.List:
+            if (not course.beenTaken()):
+                return False
         return True
 
     def display(self):
@@ -69,6 +68,8 @@ class Graph:
         graphWidth = maxCIAS * 12                                       # _[____ ____]
         semester = 1
         for List in self.ListBySem:                                     # For every semester's course list.
+            if (List == self.ListBySem[len(self.ListBySem) - 1]):       # The last list is always an empty list.
+                break                                                   # So don't do anything with it.
             print("\t   |")                                             # Blank preceding line.
             print("Semester " + str(semester) + " |"),
             blanksBWCourses = graphWidth - len(List) * 12

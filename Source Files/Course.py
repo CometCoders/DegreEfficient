@@ -38,10 +38,10 @@ class Course(object):
         return self.taken
 
     def toString(self):
-        if (len(self.name) == 2): 
-            return "[ " + self.name + " ] "# + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
-        elif (len(self.name) == 3):
-            return "[" + self.name  + " ]"# + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
+        if (len(self.name) == 7): 
+            return " [" + self.name + "] "# + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
+        elif (len(self.name) == 8):
+            return "[" + self.name  + "] "# + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
         else:
             return "[" +  self.name + "]"# + "(" + str(self.inDegree) + ", " + str(self.outDegree) + ") "
 
