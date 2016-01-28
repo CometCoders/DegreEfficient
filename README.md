@@ -20,6 +20,7 @@ A text file containing data in this format:
 ## To do
 
  - [ ] Support for co-requisites (both weak and strict).
+ - [ ] Automatically generate the input file using UTD's course catalog.
  - [ ] Support for courses that can't be taken before a given semester. 
 
 ## License
